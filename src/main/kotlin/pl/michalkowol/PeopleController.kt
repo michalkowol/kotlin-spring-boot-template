@@ -30,7 +30,7 @@ constructor(private val peopleRepository: PeopleRepository) {
     }
 
     @RequestMapping("/{id}")
-    fun person(@PathVariable id: Long): Person? {
+    fun person(@PathVariable id: Long): Person {
         if (id == 10L) {
             throw ArithmeticException(id.toString())
         } else if (id == 11L) {
@@ -39,7 +39,7 @@ constructor(private val peopleRepository: PeopleRepository) {
             throw IllegalStateException(id.toString())
         }
 
-        val person = peopleRepository.findOne(id)
+        val person = peopleRepository.findOne(id) ?: throw NotFoundException("Person with id=$id was not found.")
         return person
     }
 

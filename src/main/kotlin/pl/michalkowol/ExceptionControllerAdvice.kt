@@ -23,4 +23,12 @@ class ExceptionControllerAdvice {
         log.error("", ex)
         return ex
     }
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException::class)
+    fun notFound(ex: NotFoundException): NotFound {
+        log.info("Not found: {}", ex)
+        val response = if (ex.msg == null) NotFound() else NotFound(message = ex.msg)
+        return response
+    }
 }
