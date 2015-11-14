@@ -15,8 +15,6 @@ gradle build
 ## Run
 
 ```
-gradle run
-# or
 gradle bootRun
 ```
 
@@ -24,7 +22,7 @@ gradle bootRun
 
 ```
 gradle assemble
-java -jar ${NAME}-${VERSION}.jar
+java -jar build/libs/{NAME}-${VERSION}.jar
 ```
 
 ## References
