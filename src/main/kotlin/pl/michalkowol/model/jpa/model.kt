@@ -4,11 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
 import javax.persistence.*
 
-//@Entity(name = "people")
-//data class Person(@Id val id: Long?, val name: String?) {
-//    protected constructor() : this(null, null)
-//}
-
 @Entity(name = "people")
 class Person {
     @Id
