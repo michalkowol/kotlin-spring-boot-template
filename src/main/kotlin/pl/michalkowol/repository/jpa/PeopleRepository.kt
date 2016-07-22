@@ -1,4 +1,4 @@
-package pl.michalkowol.repository
+package pl.michalkowol.repository.jpa
 
 import org.springframework.data.repository.CrudRepository
 import pl.michalkowol.model.jpa.Person

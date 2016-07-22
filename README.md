@@ -8,19 +8,24 @@ Spring Boot template with Kotlin, PostgreSQL 9.4, JPA, CrudRepository.
 
 ## Build
 
-```
+```bash
 gradle build
 ```
 
 ## Run
 
-```
+```bash
 gradle bootRun
+```
+
+## Test
+```bash
+gradle test
 ```
 
 ## One-Jar
 
-```
+```bash
 gradle assemble
 java -jar build/libs/{NAME}-${VERSION}.jar
 ```

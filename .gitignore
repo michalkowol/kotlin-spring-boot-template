@@ -2,6 +2,7 @@
 *.log
 logs
 build
+classes
 /.gradle
 /.idea
 /*.iml

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 class ExceptionControllerAdvice {
 
-    protected val log = LoggerFactory.getLogger(javaClass)
+    private val log = LoggerFactory.getLogger(javaClass)
 
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler

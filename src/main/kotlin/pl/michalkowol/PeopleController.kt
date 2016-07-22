@@ -5,17 +5,19 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import pl.michalkowol.model.jpa.Person
-import pl.michalkowol.repository.PeopleRepository
+import pl.michalkowol.model.simple.Person
+import pl.michalkowol.repository.simple.SimplePeopleRepository
+import java.util.*
+
+//import pl.michalkowol.model.jpa.Person
+//import pl.michalkowol.repository.jpa.SimplePeopleRepository
 
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/people")
-class PeopleController
-@Autowired
-constructor(private val peopleRepository: PeopleRepository) {
+class PeopleController @Autowired constructor(private val peopleRepository: SimplePeopleRepository) {
 
-    protected val log = LoggerFactory.getLogger(javaClass)
+    private val log = LoggerFactory.getLogger(javaClass)
 
     @RequestMapping
     fun people(): Iterable<Person> {
