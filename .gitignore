@@ -1,8 +1,8 @@
 *.class
 *.log
-logs
-build
-classes
+/logs
+/build
+/classes
 /.gradle
 /.idea
 /*.iml

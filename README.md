@@ -19,8 +19,21 @@ gradle bootRun
 ```
 
 ## Test
+
 ```bash
 gradle test
+```
+
+## Start db
+
+```bash
+docker run --name softwareberg-postgres-db -p 5432:5432 -e POSTGRES_USER=softwareberg -e POSTGRES_PASSWORD=softwareberg -d postgres:9.6
+```
+
+## Clean db
+
+```bash
+flyway -url=jdbc:postgresql://localhost:5432/softwareberg -user=softwareberg -password=softwareberg clean
 ```
 
 ## One-Jar
