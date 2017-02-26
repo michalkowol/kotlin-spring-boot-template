@@ -15,7 +15,7 @@ class PeopleControllerSpec {
         // given
         val uuid = UUID.fromString("deadbeef-dead-beef-dead-beef00000001")
         val peopleRepository = mock<PeopleRepository> {
-            on { findOne(any()) } doReturn Person.create(uuid, "Michal", 28, emptyList())
+            on { findOne(any()) } doReturn Person.create("Michal", 28, emptyList())
         }
         val peopleController = PeopleController(peopleRepository)
         // when

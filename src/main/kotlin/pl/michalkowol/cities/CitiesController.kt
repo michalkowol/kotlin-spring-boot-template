@@ -12,7 +12,7 @@ import java.util.*
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/cities")
-internal class CitiesController @Autowired constructor(private val citiesRepository: CitiesRepository) {
+class CitiesController @Autowired constructor(private val citiesRepository: CitiesRepository) {
 
     @RequestMapping
     fun people(): Iterable<City> {

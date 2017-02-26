@@ -8,12 +8,11 @@ import java.util.*
 import javax.persistence.*
 
 @Entity(name = "people")
-internal class Person {
+class Person {
 
     companion object {
-        fun create(id: UUID, name: String, age: Int, addresses: List<Address>): Person {
+        fun create(name: String, age: Int, addresses: List<Address>): Person {
             val person = Person()
-            person.id = id
             person.name = name
             person.age = age
             person.addresses = addresses.toMutableList()
@@ -41,7 +40,17 @@ internal class Person {
 }
 
 @Entity(name = "addresses")
-internal class Address {
+class Address {
+
+    companion object {
+        fun create(street: String, city: City): Address {
+            val address = Address()
+            address.street = street
+            address.city = city
+            return address
+        }
+    }
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")

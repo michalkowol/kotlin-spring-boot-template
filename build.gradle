@@ -103,6 +103,9 @@ dependencies {
 
     integrationTestCompile 'junit:junit:4.+'
     integrationTestCompile 'com.ninja-squad:DbSetup:2.1.+'
+    integrationTestCompile 'org.springframework:spring-test:5.0.0.M4'
+    integrationTestCompile 'org.springframework:spring-context:5.0.0.M4'
+    integrationTestCompile 'org.springframework.boot:spring-boot-test'
     integrationTestCompile "com.github.softwareberg.rinca:database:$rinca"
 }
 

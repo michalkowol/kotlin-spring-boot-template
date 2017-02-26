@@ -1,4 +1,4 @@
-package pl.michalkowol
+package pl.michalkowol.people
 
 import com.ninja_squad.dbsetup.DbSetup
 import com.ninja_squad.dbsetup.Operations

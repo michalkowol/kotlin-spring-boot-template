@@ -7,7 +7,16 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
 @Entity(name = "cities")
-internal class City {
+class City {
+
+    companion object {
+        fun create(name: String): City {
+            val city = City()
+            city.name = name
+            return city
+        }
+    }
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
