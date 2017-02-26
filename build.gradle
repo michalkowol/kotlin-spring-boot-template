@@ -55,6 +55,15 @@ task stage(dependsOn: ['assemble', 'clean'])
 assemble.mustRunAfter clean
 stage.dependsOn(assemble)
 
+jacocoTestReport {
+    reports {
+        csv.enabled false
+        html.enabled true
+        xml.enabled true
+    }
+    dependsOn test
+}
+
 repositories {
     mavenCentral()
     jcenter()
