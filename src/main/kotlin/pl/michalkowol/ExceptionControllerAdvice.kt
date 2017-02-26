@@ -15,16 +15,16 @@ class ExceptionControllerAdvice {
 
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler
-    fun handleException(ex: Exception): Exception {
+    fun handleException(ex: Exception): Error {
         log.error("", ex)
-        return ex
+        return IntenralError(message = ex.message)
     }
 
     @ResponseStatus(value = HttpStatus.PAYMENT_REQUIRED)
     @ExceptionHandler(ArithmeticException::class, NullPointerException::class)
     fun handleTwoExceptions(ex: Exception): Error {
         log.error("", ex)
-        return IntenralError(message = ex.message)
+        return IntenralError(status = HttpStatus.PAYMENT_REQUIRED.value(), message = ex.message)
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND)

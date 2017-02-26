@@ -1,5 +1,8 @@
 # Spring Boot Template
 
+[![Build Status](https://travis-ci.org/michalkowol/kotlin-spring-boot-template.svg?branch=master)](https://travis-ci.org/michalkowol/kotlin-spring-boot-template)
+[![Coverage Status](https://codecov.io/github/michalkowol/kotlin-spring-boot-template/badge.svg?branch=master)](https://codecov.io/github/michalkowol/kotlin-spring-boot-template?branch=master)
+
 Spring Boot template with Kotlin, PostgreSQL 9.6, JPA, CrudRepository.
 
 [http://localhost:8080/people](http://localhost:8080/people)
