@@ -22,7 +22,7 @@ apply plugin: 'jacoco'
 defaultTasks 'bootRun'
 
 jar {
-    baseName = 'api'
+    baseName = 'spring-boot-kotlin-template'
     version = '0.1.0'
 }
 
@@ -31,6 +31,10 @@ test {
         events 'passed', 'skipped', 'failed'
     }
 }
+
+task stage(dependsOn: ['assemble', 'clean'])
+assemble.mustRunAfter clean
+stage.dependsOn(assemble)
 
 repositories {
     mavenCentral()
@@ -57,8 +61,9 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     compile 'org.springframework.boot:spring-boot-starter-jdbc'
-    compile 'org.postgresql:postgresql:9.4.+'
     compile 'javax.el:el-api:2.+'
+    compile 'com.zaxxer:HikariCP:2.5.+'
+    compile 'org.postgresql:postgresql:9.4.+'
     compile 'org.flywaydb:flyway-core:4.1.+'
 
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"

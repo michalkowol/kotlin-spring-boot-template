@@ -1,21 +1,22 @@
 # Spring Boot Template
 
-Spring Boot template with Kotlin, PostgreSQL 9.4, JPA, CrudRepository.
+Spring Boot template with Kotlin, PostgreSQL 9.6, JPA, CrudRepository.
 
 [http://localhost:8080/people](http://localhost:8080/people)
 
 [http://localhost:8080/people/1](http://localhost:8080/people/1)
 
-## Build
-
-```bash
-gradle build
-```
 
 ## Run
 
 ```bash
 gradle bootRun
+```
+
+or
+
+```bash
+gradle
 ```
 
 ## Test
@@ -24,7 +25,19 @@ gradle bootRun
 gradle test
 ```
 
-## Start db
+## Continuous tests
+
+```bash
+gradle test -t
+```
+
+or
+
+```bash
+gradle test --continuous
+```
+
+## Docker
 
 ```bash
 docker run --name softwareberg-postgres-db -p 5432:5432 -e POSTGRES_USER=softwareberg -e POSTGRES_PASSWORD=softwareberg -d postgres:9.6
@@ -41,6 +54,31 @@ flyway -url=jdbc:postgresql://localhost:5432/softwareberg -user=softwareberg -pa
 ```bash
 gradle assemble
 java -jar build/libs/{NAME}-${VERSION}.jar
+```
+
+## Heroku
+
+### Test on local
+
+```bash
+heroku local web
+```
+
+### Deploy
+
+```bash
+heroku login
+heroku create
+git push heroku master
+heroku logs -t 
+```
+
+or
+
+```bash
+heroku git:remote -a NAME_OF_APP
+git push heroku master
+heroku logs -t 
 ```
 
 ## Random
