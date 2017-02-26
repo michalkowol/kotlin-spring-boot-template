@@ -1,18 +1,17 @@
-package pl.michalkowol
+package pl.michalkowol.people
 
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import pl.michalkowol.model.jpa.Person
-import pl.michalkowol.repository.jpa.PeopleRepository
+import pl.michalkowol.NotFoundException
 import java.util.*
 
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/people")
-class PeopleController @Autowired constructor(private val peopleRepository: PeopleRepository) {
+internal class PeopleController @Autowired constructor(private val peopleRepository: PeopleRepository) {
 
     private val log = LoggerFactory.getLogger(PeopleController::class.java)
 
@@ -41,8 +40,6 @@ class PeopleController @Autowired constructor(private val peopleRepository: Peop
         val person = peopleRepository.findOne(id) ?: throw NotFoundException("Person with id=$id was not found.")
         return person
     }
-
-
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(NameException::class)

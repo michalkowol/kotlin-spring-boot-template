@@ -1,12 +1,13 @@
-package pl.michalkowol.model.jpa
+package pl.michalkowol.people
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonInclude
+import pl.michalkowol.cities.City
 import java.util.*
 import javax.persistence.*
 
 @Entity(name = "people")
-class Person {
+internal class Person {
     @Id
     lateinit var id: UUID
 
@@ -25,7 +26,7 @@ class Person {
 }
 
 @Entity(name = "addresses")
-class Address {
+internal class Address {
     @Id
     lateinit var id: UUID
 
@@ -43,12 +44,4 @@ class Address {
             inverseJoinColumns = arrayOf(JoinColumn(name = "person_id", referencedColumnName = "id"))
     )
     lateinit var people: MutableList<Person>
-}
-
-@Entity(name = "cities")
-class City {
-    @Id
-    lateinit var id: UUID
-
-    lateinit var name: String
 }

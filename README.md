@@ -43,6 +43,53 @@ gradle assemble
 java -jar build/libs/{NAME}-${VERSION}.jar
 ```
 
+## Random
+
+```kotlin
+package pl.michalkowol.repository.simple
+
+import org.springframework.stereotype.Repository
+
+/*
+| Annotation | Meaning                                             |
++------------+-----------------------------------------------------+
+| @Component | generic stereotype for any Spring-managed component |
+| @Repository| stereotype for persistence layer                    |
+| @Service   | stereotype for service layer                        |
+| @Controller| stereotype for presentation layer (spring-mvc)      |
+ */
+
+data class Address(val street: String, val city: String)
+data class Person(val name: String, val addresses: List<Address>)
+
+@Repository
+open class SimplePeopleRepository {
+    /*
+    Why does it have `open` modifier?
+    Unable to proxy method [public final java.util.List pl.michalkowol.repository.simple.SimplePeopleRepository.findByName(java.lang.String)]
+    because it is final: All calls to this method via a proxy will NOT be routed to the target instance.
+     */
+    open fun findOne(id: Long): Person? {
+        if (id == 1L) {
+            return Person("Michal", listOf(Address("Chemiczna", "Gliwice"), Address("Pulawska", "Warszawa")))
+        } else if (id == 2L) {
+            return Person("Kasia", listOf(Address("Przybylskiego", "Warszawa")))
+        }
+        return null
+    }
+
+    open fun findAll(): List<Person> {
+        val people = listOf(findOne(1), findOne(2)).filterNotNull()
+        return people
+    }
+
+    open fun findByName(name: String): List<Person> {
+        val people = listOf(findOne(1), findOne(2)).filterNotNull()
+        return people.filter { it.name == name }
+    }
+}
+```
+
 ## References
 * [Spring Boot](http://projects.spring.io/spring-boot/)
 * [Use Jetty instead of Tomcat](http://docs.spring.io/spring-boot/docs/current/reference/html/howto-embedded-servlet-containers.html#howto-use-jetty-instead-of-tomcat)

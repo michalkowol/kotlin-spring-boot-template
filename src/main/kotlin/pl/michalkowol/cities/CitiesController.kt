@@ -1,4 +1,4 @@
-package pl.michalkowol
+package pl.michalkowol.cities
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
@@ -6,14 +6,13 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import pl.michalkowol.model.jpa.City
-import pl.michalkowol.repository.jpa.CitiesRepository
+import pl.michalkowol.NotFoundException
 import java.util.*
 
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/cities")
-class CitiesController @Autowired constructor(private val citiesRepository: CitiesRepository) {
+internal class CitiesController @Autowired constructor(private val citiesRepository: CitiesRepository) {
 
     @RequestMapping
     fun people(): Iterable<City> {
