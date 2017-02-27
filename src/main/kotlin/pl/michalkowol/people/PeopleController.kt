@@ -11,7 +11,7 @@ import java.util.*
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/people")
-internal class PeopleController @Autowired constructor(private val peopleRepository: PeopleRepository) {
+class PeopleController @Autowired constructor(private val peopleRepository: PeopleRepository) {
 
     private val log = LoggerFactory.getLogger(PeopleController::class.java)
 

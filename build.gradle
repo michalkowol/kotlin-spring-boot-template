@@ -26,12 +26,6 @@ jar {
     version = '0.1.0'
 }
 
-test {
-    testLogging {
-        events 'passed', 'skipped', 'failed'
-    }
-}
-
 sourceSets {
     integrationTest {
         kotlin{
@@ -49,6 +43,18 @@ configurations {
 task integrationTest(type: Test) {
     testClassesDir = sourceSets.integrationTest.output.classesDir
     classpath = sourceSets.integrationTest.runtimeClasspath
+}
+
+test {
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
+}
+
+integrationTest {
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
 }
 
 task stage(dependsOn: ['assemble', 'clean'])

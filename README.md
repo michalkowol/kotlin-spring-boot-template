@@ -22,10 +22,16 @@ or
 gradle
 ```
 
-## Test
+## Tests
 
 ```bash
 gradle test
+```
+
+## Integration tests
+
+```bash
+gradle integrationTest
 ```
 
 ## Continuous tests
@@ -135,6 +141,11 @@ open class SimplePeopleRepository {
 
 ## Links
 
+* [Testing improvements in Spring Boot 1.4](https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4)
+* [404 Not Found](http://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/SpringApplicationConfiguration.html)
+* [Maven Repository: org.springframework » spring-context](https://mvnrepository.com/artifact/org.springframework/spring-context)
+* [41. Testing](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html)
+* [Getting Started · Managing Transactions](https://spring.io/guides/gs/managing-transactions/)
 * [unit testing - How to test Spring Data repositories? - Stack Overflow](http://stackoverflow.com/questions/23435937/how-to-test-spring-data-repositories)
 * [Testing improvements in Spring Boot 1.4](https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4)
 * [404 Not Found](http://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/SpringApplicationConfiguration.html)
