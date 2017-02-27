@@ -141,6 +141,7 @@ open class SimplePeopleRepository {
 
 ## Links
 
+* [41. Testing](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html)
 * [Testing improvements in Spring Boot 1.4](https://spring.io/blog/2016/04/15/testing-improvements-in-spring-boot-1-4)
 * [404 Not Found](http://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/SpringApplicationConfiguration.html)
 * [Maven Repository: org.springframework » spring-context](https://mvnrepository.com/artifact/org.springframework/spring-context)

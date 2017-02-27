@@ -1,5 +1,8 @@
 package pl.michalkowol.people
 
+import com.natpryce.hamkrest.assertion.assertThat
+import com.natpryce.hamkrest.equalTo
+import com.natpryce.hamkrest.should.shouldMatch
 import com.ninja_squad.dbsetup.DbSetup
 import com.ninja_squad.dbsetup.Operations
 import com.ninja_squad.dbsetup.Operations.deleteAllFrom
@@ -10,7 +13,6 @@ import com.softwareberg.Database
 import com.softwareberg.Extractor
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.util.*
 
@@ -36,8 +38,8 @@ class DatabaseSpec {
         // when
         val people = db.findAll("SELECT id, name, age FROM people", personExtractor)
         // then
-        assertEquals(28, people[0].age)
-        assertEquals(27, people[1].age)
+        assertThat(people[0].age, equalTo(28))
+        people[1].age shouldMatch equalTo(27)
     }
 
     private fun prepareDatabase(operation: Operation) {

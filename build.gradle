@@ -105,9 +105,11 @@ dependencies {
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
 
     testCompile 'junit:junit:4.+'
+    testCompile 'com.natpryce:hamkrest:1.3.+'
     testCompile 'com.nhaarman:mockito-kotlin:1.3.+'
 
     integrationTestCompile 'junit:junit:4.+'
+    integrationTestCompile 'com.natpryce:hamkrest:1.3.+'
     integrationTestCompile 'com.ninja-squad:DbSetup:2.1.+'
     integrationTestCompile 'org.springframework:spring-test:5.0.0.M4'
     integrationTestCompile 'org.springframework:spring-context:5.0.0.M4'
