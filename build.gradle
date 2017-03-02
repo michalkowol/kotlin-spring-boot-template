@@ -1,10 +1,9 @@
 buildscript {
-    ext.kotlin_version = '1.1.0-rc-91'
+    ext.kotlin_version = '1.1.0'
     ext.spring_boot_version = '2.0.0.BUILD-SNAPSHOT'
     repositories {
         mavenCentral()
         jcenter()
-        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.1' }
         maven { url 'https://repo.spring.io/snapshot' }
         maven { url 'https://repo.spring.io/libs-milestone' }
     }
@@ -81,9 +80,9 @@ repositories {
 }
 
 dependencies {
-    ext.kotlinxcoroutines = '0.10-rc'
+    ext.kotlinxcoroutines = '0.12'
     ext.jacksonVersion = '2.8.7'
-    ext.rinca = '0.4.+'
+    ext.rinca = '0.5.+'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
