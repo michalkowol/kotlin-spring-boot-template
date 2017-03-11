@@ -62,7 +62,7 @@ flyway -url=jdbc:postgresql://localhost:5432/softwareberg -user=softwareberg -pa
 
 ```bash
 gradle assemble
-java -jar build/libs/{NAME}-${VERSION}.jar
+java -jar build/libs/{NAME}-assembly-${VERSION}.jar
 ```
 
 ## Heroku

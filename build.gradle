@@ -89,11 +89,11 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web') {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
     }
-    compile 'org.springframework.boot:spring-boot-devtools'
     compile 'org.springframework.boot:spring-boot-starter-jetty'
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-devtools'
     compile 'org.springframework.boot:spring-boot-starter-actuator'
 
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile 'org.springframework.boot:spring-boot-starter-jdbc'
     compile 'javax.el:el-api:2.+'
     compile 'com.zaxxer:HikariCP:2.5.+'
@@ -103,6 +103,8 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
+
+    // can be replace with 'org.springframework.boot:spring-boot-starter-test'
 
     testCompile 'junit:junit:4.+'
     testCompile 'com.natpryce:hamkrest:1.3.+'
