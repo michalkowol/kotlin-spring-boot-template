@@ -1,40 +1,48 @@
-# Spring Boot Template
+# Kotlin Spring Boot REST Template
 
 [![Build Status](https://travis-ci.org/michalkowol/kotlin-spring-boot-template.svg?branch=master)](https://travis-ci.org/michalkowol/kotlin-spring-boot-template)
 [![Coverage Status](https://codecov.io/github/michalkowol/kotlin-spring-boot-template/badge.svg?branch=master)](https://codecov.io/github/michalkowol/kotlin-spring-boot-template?branch=master)
 
-Spring Boot template with Kotlin, PostgreSQL 9.6, JPA, CrudRepository.
+## Architecture
 
-[http://localhost:8080/people](http://localhost:8080/people)
+### Package By Feature
 
-[http://localhost:8080/people/1](http://localhost:8080/people/1)
+Package-by-feature uses packages to reflect the feature set. It tries to place all items related to a single feature (and only that feature) into a single directory/package. This results in packages with high cohesion and high modularity, and with minimal coupling between packages. Items that work closely together are placed next to each other. They aren't spread out all over the application. It's also interesting to note that, in some cases, deleting a feature can reduce to a single operation - deleting a directory. (Deletion operations might be thought of as a good test for maximum modularity: an item has maximum modularity only if it can be deleted in a single operation.)
+
+Source: http://www.javapractices.com/topic/TopicAction.do?Id=205
+
+### HTTP
+
+Thread HTTP only as your transporting layer. Try to avoid leaking HTTP logic into your briskness logic. Utilize **domain-driven design**.
 
 
-## Run
+## Build
 
-```bash
-gradle bootRun
-```
-
-or
+### Default
 
 ```bash
 gradle
 ```
 
-## Tests
+### Build
 
 ```bash
-gradle test
+gradle build
 ```
 
-## Integration tests
+### Run
 
 ```bash
-gradle integrationTest
+gradle run
 ```
 
-## Continuous tests
+### Tests
+
+```bash
+gradle check
+```
+
+### Continuous tests
 
 ```bash
 gradle test -t
@@ -46,23 +54,69 @@ or
 gradle test --continuous
 ```
 
-## Docker
-
+### Integration tests
+    
 ```bash
-docker run --name softwareberg-postgres-db -p 5432:5432 -e POSTGRES_USER=softwareberg -e POSTGRES_PASSWORD=softwareberg -d postgres:9.6
+gradle integrationTest
 ```
 
-## Clean db
-
-```bash
-flyway -url=jdbc:postgresql://localhost:5432/softwareberg -user=softwareberg -password=softwareberg clean
-```
-
-## One-Jar
+### One-Jar
 
 ```bash
 gradle assemble
+
 java -jar build/libs/{NAME}-assembly-${VERSION}.jar
+
+java -Dspring.profiles.active=dev -jar build/libs/{NAME}-assembly-${VERSION}.jar
+java -Dspring.profiles.active=qa -jar build/libs/{NAME}-assembly-${VERSION}.jar
+java -Dspring.profiles.active=staging -jar build/libs/{NAME}-assembly-${VERSION}.jar
+java -Dspring.profiles.active=production -jar build/libs/{NAME}-assembly-${VERSION}.jar
+
+java -Denvironment=dev -jar build/libs/{NAME}-assembly-${VERSION}.jar
+java -Denvironment=qa -jar build/libs/{NAME}-assembly-${VERSION}.jar
+java -Denvironment=staging -jar build/libs/{NAME}-assembly-${VERSION}.jar
+java -Denvironment=production -jar build/libs/{NAME}-assembly-${VERSION}.jar
+```
+
+### Code coverage
+
+```bash
+gradle jacocoTestReport
+open build/jacocoHtml/index.html
+```
+
+## PostgreSQL
+
+### Docker
+
+```bash
+docker run --name softwareberg-postgres-db -p 5432:5432 -e POSTGRES_DB=softwareberg -e POSTGRES_USER=softwareberg -e POSTGRES_PASSWORD=softwareberg -d postgres:9.6
+```
+
+### Library
+
+`build.gradle`:
+
+```groovy
+// ...
+dependencies {
+    // ...
+    compile 'org.postgresql:postgresql:9.4.+'
+    // ...
+}
+// ...
+```
+
+### Configuration
+
+`application.properties`:
+
+```properties
+# ...
+datasource.jdbcUrl=jdbc:postgresql://localhost:5432/softwareberg
+datasource.username=softwareberg
+datasource.password=softwareberg
+# ...
 ```
 
 ## Heroku
@@ -91,6 +145,12 @@ heroku logs -t
 ```
 
 https://spring-boot-kotlin-template.herokuapp.com/
+
+## IntelliJ
+
+Remember to turn on "Annotation Predecessors"
+
+![Annotation Processors](docs/annotation-processors.png)
 
 ## Random
 
@@ -200,3 +260,10 @@ open class SimplePeopleRepository {
 * [Covariant types in Kotlin translated to wildcard types in Java](https://youtrack.jetbrains.com/issue/KT-5792)
 * [Kotlin with JPA: default constructor hell](http://stackoverflow.com/questions/32038177/kotlin-with-jpa-default-constructor-hell)
 * [CrudRepository](http://docs.spring.io/spring-data/data-commons/docs/1.6.1.RELEASE/reference/html/repositories.html)
+
+## References
+
+* [Spring Boot](http://projects.spring.io/spring-boot/)
+* [Use Jetty instead of Tomcat](http://docs.spring.io/spring-boot/docs/current/reference/html/howto-embedded-servlet-containers.html#howto-use-jetty-instead-of-tomcat)
+* [CrudRepository](http://docs.spring.io/spring-data/data-commons/docs/1.6.1.RELEASE/reference/html/repositories.html)
+* [Jackson Mappers Wrapper (Karol Król)](https://github.com/kjkrol/jackson-mappers-wrapper)

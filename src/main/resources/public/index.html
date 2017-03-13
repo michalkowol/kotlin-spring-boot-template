@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spring Boot REST Template</title>
+
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="text-center"><h1>Spring Boot REST Template</h1></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>Links</h3>
+      <ul>
+        <li><a href="https://projects.spring.io/spring-boot/" target="_blank">Spring Boot - Takes an opinionated view of building production-ready Spring applications. Spring Boot favors convention over configuration and is designed to get you up and running as quickly as possible.</a></li>
+      </ul>
+
+      <h3>Diagnostic endpoints</h3>
+      <ul>
+        <li><a href="/health">GET /health</a> - health endpoint</li>
+        <li><a href="/env">GET /env</a> - exposes properties from Spring’s ConfigurableEnvironment</li>
+        <li><a href="/flyway">GET /flyway</a> - shows any Flyway database migrations that have been applied</li>
+        <li><a href="/info">GET /info</a> - displays arbitrary application info</li>
+        <li><a href="/metrics">GET /metrics</a> - shows ‘metrics’ information for the current application</li>
+        <li><a href="/mappings">GET /mappings</a> - displays a collated list of all @RequestMapping paths</li>
+        <li><a href="/trace">GET /trace</a> - displays trace information (by default the last 100 HTTP requests)</li>
+        <li><a href="/h2-console">GET /h2-console</a> - the H2 database provides a browser-based console</li>
+      </ul>
+
+      <h3>Database</h3>
+      <ul>
+        <li><a href="/cars">GET /cars</a> - list all cars from database</li>
+        <li><a href="/cars/1">GET /cars/:id</a> - get car by id</li>
+        <li><a href="/cars/42">GET /cars/:id</a> - get car by id (does not exist - 404)</li>
+        <li><button type="button" class="btn btn-xs btn-primary" onclick="createCar()">POST</button> /cars - create new car</li>
+        <li><button type="button" class="btn btn-xs btn-primary" onclick="updateCar()">PUT</button> /cars/:id - change car</li>
+        <li><button type="button" class="btn btn-xs btn-danger" onclick="deleteCar()">DELETE</button> /cars/:id - delete car</li>
+        <li><a href="/cars/create?id=5&name=VW">GET /cars/create?id=:id&name=:name</a> - create car with query params (not RESTfull - only for demo)</li>
+        <li><a href="/people">GET /people</a> - list all people from database</li>
+        <li><a href="/people?name=Michal">GET /people?name=:name</a> - search all people with 'name'</li>
+        <li><a href="/people/cba1b394-7e52-4eef-ad4a-921a1073ecf6">GET /people/:uuid</a> - get person by uuid</li>
+      </ul>
+
+      <h3>HTTP</h3>
+      <ul>
+        <li><a href="/news">GET /news</a> - get top HackerNews (two underling HTTP calls)</li>
+      </ul>
+
+      <h3>Others</h3>
+      <ul>
+        <li><a href="/errors">GET /errors</a> - 33% chance to get 500 Internal Server Error, 33% change to get 404 Not Found, 33% to get 200 Success</li>
+        <li><a href="/redirect">GET /redirect</a> - redirect to /health</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script>
+  function createCar() {
+    var car = {
+      id: 44,
+      name: 'Honda'
+    };
+    $.ajax({
+      type: 'POST',
+      url: '/cars',
+      contentType: 'application/json',
+      data: JSON.stringify(car)
+    }).done(function (data) {
+      window.location.replace('/cars');
+    }).fail(function (data) {
+      alert(data);
+    });
+  }
+
+  function deleteCar() {
+    $.ajax({
+      type: 'DELETE',
+      url: '/cars/1'
+    }).done(function (data) {
+      window.location.replace('/cars');
+    }).fail(function (data) {
+      alert(data);
+    });
+  }
+
+  function updateCar() {
+    var car = {
+      id: 2,
+      name: 'Seat (' + Date.now() + ')'
+    };
+    $.ajax({
+      type: 'PUT',
+      url: '/cars/2',
+      contentType: 'application/json',
+      data: JSON.stringify(car)
+    }).done(function (data) {
+      window.location.replace('/cars');
+    }).fail(function (data) {
+      alert(data);
+    });
+  }
+</script>
+</body>
+</html>
