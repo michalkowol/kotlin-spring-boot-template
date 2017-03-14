@@ -1,9 +1,7 @@
 package com.michalkowol.cars
 
-import com.ninja_squad.dbsetup.DbSetup
-import com.ninja_squad.dbsetup.Operations.*
-import com.ninja_squad.dbsetup.destination.DataSourceDestination
-import com.ninja_squad.dbsetup.operation.Operation
+import com.ninja_squad.dbsetup.Operations.deleteAllFrom
+import com.ninja_squad.dbsetup_kotlin.dbSetup
 import org.hamcrest.CoreMatchers.containsString
 import org.hamcrest.collection.IsCollectionWithSize.hasSize
 import org.hamcrest.core.IsEqual.equalTo
@@ -35,17 +33,18 @@ class CarsSpec {
 
     private val deleteAllCars = deleteAllFrom("cars")
 
-    private val insertCars = insertInto("cars")
-            .columns("id", "name")
-            .values(1, "Audi")
-            .values(2, "Opel")
-            .values(3, "BMW")
-            .build()
-
     @Test
     fun itShouldSelectAllCars() {
         // given
-        prepareDatabase(sequenceOf(deleteAllCars, insertCars))
+        dbSetup(dataSource) {
+            execute(deleteAllCars)
+            insertInto("cars") {
+                columns("id", "name")
+                values(1, "Audi")
+                values(2, "Opel")
+                values(3, "BMW")
+            }
+        }.launch()
         // when
         val cars = carsController.cars()
         // then
@@ -58,7 +57,9 @@ class CarsSpec {
     @Test
     fun itShouldSelectAllCarsWithRest() {
         // given
-        prepareDatabase(sequenceOf(deleteAllCars))
+        dbSetup(dataSource) {
+            execute(deleteAllCars)
+        }.launch()
         val audi = CarEntity.create(1, "Audi")
         val bmw = CarEntity.create(2, "VM")
         carsRepository.save(listOf(audi, bmw))
@@ -69,9 +70,5 @@ class CarsSpec {
         // then
         assertThat(json, startsWith("[{\"id\":1"))
         assertThat(json, containsString("VM"))
-    }
-
-    private fun prepareDatabase(operation: Operation) {
-        DbSetup(DataSourceDestination(dataSource), operation).launch()
     }
 }
