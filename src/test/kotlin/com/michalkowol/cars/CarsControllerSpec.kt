@@ -19,7 +19,8 @@ class CarsControllerSpec {
         // when
         val cars = carsController.cars()
         // then
-        assertThat(cars, hasSize(equalTo(2)))
+//        assertThat(cars, hasSize(equalTo(2)))
+        assertThat(cars.size, equalTo(2))
         assertThat(cars[0], equalTo(Car(1, "Audi")))
     }
 }

@@ -82,7 +82,7 @@ java -Denvironment=production -jar build/libs/{NAME}-assembly-${VERSION}.jar
 
 ```bash
 gradle jacocoTestReport
-open build/jacocoHtml/index.html
+open build/reports/jacoco/test/html/index.html
 ```
 
 ## PostgreSQL

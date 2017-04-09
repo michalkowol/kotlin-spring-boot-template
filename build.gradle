@@ -1,28 +1,31 @@
-group = 'com.michalkowol'
-version = '0.1.0'
-
 buildscript {
-    ext.kotlin_version = '1.1.0'
-    ext.spring_boot_version = '1.5.2.RELEASE'
+    ext.kotlin_version = '1.1.1'
+    ext.spring_boot_version = '2.0.0.BUILD-SNAPSHOT'
     repositories {
         mavenCentral()
         jcenter()
         maven { url 'https://plugins.gradle.org/m2/' }
-        maven { url 'https://repo.spring.io/snapshot' }
+        maven { url 'https://repo.spring.io/libs-snapshot' }
         maven { url 'https://repo.spring.io/libs-milestone' }
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_version"
-        classpath 'gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.4.17'
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'kotlin'
-apply plugin: 'jacoco'
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'org.jetbrains.kotlin.jvm' version '1.1.1'
+//    id 'org.springframework.boot' version '1.5.2.RELEASE' // does not support snapshots
+    id 'io.spring.dependency-management' version '1.0.1.RELEASE'
+    id 'com.gorylenko.gradle-git-properties' version '1.4.17'
+}
+
 apply plugin: 'org.springframework.boot'
-//apply plugin: 'com.gorylenko.gradle-git-properties'
+
+group = 'com.michalkowol'
+version = '0.1.0'
 
 defaultTasks 'bootRun'
 
@@ -38,6 +41,12 @@ compileJava {
 jar {
     baseName = "${project.name}-assembly"
     version = project.version
+}
+
+kotlin {
+    experimental {
+        coroutines 'enable'
+    }
 }
 
 sourceSets {
@@ -89,13 +98,13 @@ repositories {
     jcenter()
     maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.1' }
     maven { url 'http://dl.bintray.com/kotlin/kotlinx.coroutines' }
-    maven { url 'https://repo.spring.io/snapshot' }
+    maven { url 'https://repo.spring.io/libs-snapshot' }
     maven { url 'https://repo.spring.io/libs-milestone' }
     maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    ext.jacksonVersion = '2.8.7'
+    ext.jackson_version = '2.9.0.pr2'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
@@ -119,10 +128,10 @@ dependencies {
     compile 'com.h2database:h2:1.4.+'
     compile 'org.flywaydb:flyway-core:4.1.+'
 
-    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
-    compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
-    compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
-    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jacksonVersion"
+    compile "com.fasterxml.jackson.core:jackson-databind:$jackson_version"
+    compile "com.fasterxml.jackson.core:jackson-annotations:$jackson_version"
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jackson_version"
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jackson_version"
     compile 'org.codehaus.woodstox:woodstox-core-asl:4.4.+'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'

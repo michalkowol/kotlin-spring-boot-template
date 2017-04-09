@@ -21,7 +21,7 @@ class CarsController @Inject constructor(private val carsRepository: CarsReposit
 
     @RequestMapping("/{id}")
     fun carById(@PathVariable id: Int): Car {
-        val carEntity = carsRepository.findOne(id) ?: throw NotFoundException("Car with id=$id not found")
+        val carEntity = carsRepository.findOne(id).orElseThrow { NotFoundException("Car with id=$id not found") }
         val car = Car(carEntity.id, carEntity.name)
         return car
     }
@@ -49,7 +49,7 @@ class CarsController @Inject constructor(private val carsRepository: CarsReposit
             throw BadRequestException("Request id is not equal Car.id")
         }
 
-        val carEntity = carsRepository.findOne(id) ?: throw NotFoundException("Car with id=$id not found")
+        val carEntity = carsRepository.findOne(id).orElseThrow { NotFoundException("Car with id=$id not found") }
         carEntity.name = car.name
         val saved = carsRepository.save(carEntity)
 
