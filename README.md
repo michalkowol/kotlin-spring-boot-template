@@ -148,7 +148,7 @@ https://spring-boot-kotlin-template.herokuapp.com/
 
 ## IntelliJ
 
-Remember to turn on "Annotation Predecessors"
+Remember to turn on "Annotation Processors"
 
 ![Annotation Processors](docs/annotation-processors.png)
 
